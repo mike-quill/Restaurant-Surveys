@@ -4,7 +4,6 @@ CREATE TABLE restaurants (
 	latitude DOUBLE PRECISION NOT NULL,
 	longitude DOUBLE PRECISION NOT NULL,
 	street_address VARCHAR(255),
-    postal_code VARCHAR(10),
     province VARCHAR(50),
     country VARCHAR(50),
     phone_number VARCHAR(20),

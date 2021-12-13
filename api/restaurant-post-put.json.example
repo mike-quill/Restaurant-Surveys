@@ -1,0 +1,13 @@
+{
+    "name": "Tim Hortons",
+    "latitude": 43.650505,
+    "longitude": -79.383512,
+    "street_address": "120 Adelaide St W Unit Fc-09, Toronto",
+    "province": "Ontario",
+    "country": "Canada",
+    "phone_number": "6473505543",
+    "website": "https://www.timhortons.ca/"
+  }
+
+  name, latitude, longitude, street_address, province, country, phone_number, website
+  
