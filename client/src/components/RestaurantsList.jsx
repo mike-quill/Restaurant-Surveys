@@ -40,7 +40,7 @@ function RestaurantsList(props) {
                         return (
                             <tr key={restaurant.id}>
                                 <td>{restaurant.name}</td>
-                                <td>GPS coords here</td>
+                                <td>{restaurant.street_address}</td>
                                 <td>Rating</td>
                                 <td>{restaurant.phone_number}</td>
                                 <td><button className='btn btn-warning'>Edit</button></td>

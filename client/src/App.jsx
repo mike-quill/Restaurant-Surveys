@@ -10,7 +10,6 @@ import { RestaurantsContextProvider } from './context/RestaurantsContext';
 function App() {
   return (
     <RestaurantsContextProvider>
-      <div className='container'>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
@@ -19,7 +18,6 @@ function App() {
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-      </div>
     </RestaurantsContextProvider>
   );
 }
