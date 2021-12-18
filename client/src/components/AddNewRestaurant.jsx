@@ -3,7 +3,15 @@ import { Button, Collapse, Form, Row, Col } from 'react-bootstrap';
 
 function AddNewRestaurant() {
     const [open, setOpen] = useState(false);
-
+    const [name, setName] = useState("");
+    const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
+    const [streetAddress, setStreetAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [province, setProvince] = useState("");
+    const [country, setCountry] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [website, setWebsite] = useState("");
 
     // {
     //     "name": "Tim Hortons",
@@ -26,36 +34,83 @@ function AddNewRestaurant() {
             >
                 Add New Restaurant
             </Button>
-            <Row className="mb-3">
-                <Col xs="12" sm="8" md="6">
-                <Collapse in={open}>
-                <div id="collapse-new-restaurant">
-                    <Form className='border rounded p-3'>
-                        <Form.Group controlId="newRestaurantName">
-                            <Form.Label>Restaurant Name</Form.Label>
-                            <Form.Control type="text" placeholder="Restaurant Name" />
-                            <Form.Text className="text-muted">
-                                Placeholder
-                            </Form.Text>
-                        </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="newRestaurantAddress">
-                            <Form.Label>Street Address</Form.Label>
-                            <Form.Control type="text" placeholder="Street Address" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+
+            <Collapse in={open}>
+
+                <div id="collapse-new-restaurant">
+                    <Form className='border rounded p-3 mb-3'>
+                        <Row>
+                            <Col xs="12" md="4">
+                                <Form.Group controlId="newRestaurantName">
+                                    <Form.Label>Restaurant Name</Form.Label>
+                                    <Form.Control type="text" placeholder="Restaurant Name" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Street Address</Form.Label>
+                                    <Form.Control type="text" placeholder="Street Address" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>City</Form.Label>
+                                    <Form.Control type="text" placeholder="City" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Province</Form.Label>
+                                    <Form.Control type="text" placeholder="Province" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Country</Form.Label>
+                                    <Form.Control type="text" placeholder="Country" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Phone</Form.Label>
+                                    <Form.Control type="text" placeholder="Phone" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Website</Form.Label>
+                                    <Form.Control type="text" placeholder="Website" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Latitude</Form.Label>
+                                    <Form.Control type="text" placeholder="Latitude" />
+                                </Form.Group>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                    <Form.Label>Longitude</Form.Label>
+                                    <Form.Control type="text" placeholder="Longitude" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            </Col>
+                        </Row>
                     </Form>
                 </div>
+
             </Collapse>
-                </Col>
-            </Row>
-            
-        </div>
+
+
+
+        </div >
     );
 }
 
