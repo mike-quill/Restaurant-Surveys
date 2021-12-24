@@ -10,7 +10,7 @@ function RestaurantsList(props) {
 
         const fetchData = async () => {
             try {
-                const response = await RestaurantAPI.get("/restaurants/");
+                const response = await RestaurantAPI.get("/");
                 setRestaurants(response.data.data.restaurants);
                 console.log(response);
             } catch (error) {
@@ -21,6 +21,19 @@ function RestaurantsList(props) {
         fetchData();
 
     }, [])
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await RestaurantAPI.delete(`/${id}`);
+            setRestaurants(restaurants.filter(restaurant => {
+                return restaurant.id !== id
+            }));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     return (
         <div className='list-group'>
@@ -44,27 +57,10 @@ function RestaurantsList(props) {
                                 <td>Rating</td>
                                 <td>{restaurant.phone_number}</td>
                                 <td><button className='btn btn-warning'>Edit</button></td>
-                                <td><button className='btn btn-danger'>Delete</button></td>
+                                <td><button onClick={() => handleDelete(restaurant.id)} className='btn btn-danger'>Delete</button></td>
                             </tr>
                         );
                     })}
-                    {/* <tr>
-                        <td>Wendys</td>
-                        <td>GPS coords here</td>
-                        <td>Rating</td>
-                        <td>9051234444</td>
-                        <td><button className='btn btn-warning'>Edit</button></td>
-                        <td><button className='btn btn-danger'>Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Wendys</td>
-                        <td>GPS coords here</td>
-                        <td>Rating</td>
-                        <td>9051234444</td>
-                        <td><button className='btn btn-warning'>Edit</button></td>
-                        <td><button className='btn btn-danger'>Delete</button></td>
-                    </tr> */}
-
                 </tbody>
             </table>
         </div>

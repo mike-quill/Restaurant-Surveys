@@ -47,10 +47,11 @@ router.get('/:id', async function (req, res, next) {
 /* http://localhost:3001/api/v1/restaurants/ */
 router.post('/', async function (req, res, next) {
     try {
-        const id = await db.one('INSERT INTO restaurants (name, latitude, longitude, street_address, province, country, phone_number, website) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id', [req.body.name, req.body.latitude, req.body.longitude, req.body.street_address, req.body.province, req.body.country, req.body.phone_number, req.body.website]);
+        const result = await db.one('INSERT INTO restaurants (name, latitude, longitude, street_address, province, country, phone_number, website) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [req.body.name, req.body.latitude, req.body.longitude, req.body.street_address, req.body.province, req.body.country, req.body.phone_number, req.body.website]);
         res.status(200).json({
             status: "success",
-            new_id: id.id
+            new_id: result.id,
+            restaurant: result
         });
     } catch (error) {
         console.log(error);
