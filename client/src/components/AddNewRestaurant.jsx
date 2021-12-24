@@ -1,17 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Collapse, Form, Row, Col } from 'react-bootstrap';
 
-function AddNewRestaurant() {
-    const [open, setOpen] = useState(false);
-    const [name, setName] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
-    const [streetAddress, setStreetAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [province, setProvince] = useState("");
-    const [country, setCountry] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [website, setWebsite] = useState("");
+export default class AddNewRestaurant extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            name: '',
+            latitude: '',
+            longitude: '',
+            streetAddress: '',
+            city: '',
+            province: '',
+            country: '',
+            phoneNumber: '',
+            website: ''
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+        alert(`name ${this.state.name}`);
+        event.preventDefault();
+    }
+
+
 
     // {
     //     "name": "Tim Hortons",
@@ -24,75 +48,79 @@ function AddNewRestaurant() {
     //     "website": "https://www.timhortons.ca/"
     //   }
 
-    return (
-        <div>
+
+
+    render() {
+        return <div>
             <Button
                 className='mb-3'
-                onClick={() => setOpen(!open)}
+                onClick={() =>
+                    this.setState({open: !this.state.open})
+                }
                 aria-controls="collapse-new-restaurant"
-                aria-expanded={open}
+                aria-expanded={this.state.open}
             >
                 Add New Restaurant
             </Button>
 
 
-            <Collapse in={open}>
+            <Collapse in={this.state.open}>
 
                 <div id="collapse-new-restaurant">
-                    <Form className='border rounded p-3 mb-3'>
+                    <Form className='border rounded p-3 mb-3' onSubmit={this.handleSubmit}>
                         <Row>
                             <Col xs="12" md="4">
                                 <Form.Group controlId="newRestaurantName">
                                     <Form.Label>Restaurant Name</Form.Label>
-                                    <Form.Control type="text" placeholder="Restaurant Name" />
+                                    <Form.Control name='name' value={this.state.name} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
                                 <Form.Group className="mb-3" controlId="newRestaurantAddress">
                                     <Form.Label>Street Address</Form.Label>
-                                    <Form.Control type="text" placeholder="Street Address" />
+                                    <Form.Control name='streetAddress' value={this.state.streetAddress} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantCity">
                                     <Form.Label>City</Form.Label>
-                                    <Form.Control type="text" placeholder="City" />
+                                    <Form.Control name='city' value={this.state.city} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantProvince">
                                     <Form.Label>Province</Form.Label>
-                                    <Form.Control type="text" placeholder="Province" />
+                                    <Form.Control name='province' value={this.state.province} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantCountry">
                                     <Form.Label>Country</Form.Label>
-                                    <Form.Control type="text" placeholder="Country" />
+                                    <Form.Control name='country' value={this.state.country} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantPhone">
                                     <Form.Label>Phone</Form.Label>
-                                    <Form.Control type="text" placeholder="Phone" />
+                                    <Form.Control name='phoneNumber' value={this.state.phoneNumber} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantWebsite">
                                     <Form.Label>Website</Form.Label>
-                                    <Form.Control type="text" placeholder="Website" />
+                                    <Form.Control name='website' value={this.state.website} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantLatitude">
                                     <Form.Label>Latitude</Form.Label>
-                                    <Form.Control type="text" placeholder="Latitude" />
+                                    <Form.Control name='latitude' value={this.state.latitude} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantAddress">
+                                <Form.Group className="mb-3" controlId="newRestaurantLongitude">
                                     <Form.Label>Longitude</Form.Label>
-                                    <Form.Control type="text" placeholder="Longitude" />
+                                    <Form.Control name='longitude' value={this.state.longitude} type="text" onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -110,8 +138,6 @@ function AddNewRestaurant() {
 
 
 
-        </div >
-    );
+        </div >;
+    }
 }
-
-export default AddNewRestaurant;
