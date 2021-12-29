@@ -1,5 +1,5 @@
 CREATE TABLE restaurants (
-	id SERIAL PRIMARY KEY,
+	id BIGSERIAL PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
 	latitude DOUBLE PRECISION NOT NULL,
 	longitude DOUBLE PRECISION NOT NULL,
@@ -12,10 +12,10 @@ CREATE TABLE restaurants (
 );
 
 CREATE TABLE surveys (
-	id SERIAL PRIMARY KEY,
-	restaurant_id SERIAL NOT NULL,
-	comments VARCHAR(255),
-	food_ordered VARCHAR(255),
+	id BIGSERIAL PRIMARY KEY,
+	restaurant_id BIGINT NOT NULL,
+	rating INTEGER NOT NULL check(rating >= 1 and rating <= 5),
+	comments TEXT NOT NULL,
 	date_submitted TIMESTAMP,
 	FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
 );
