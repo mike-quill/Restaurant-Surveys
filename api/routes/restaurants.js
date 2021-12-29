@@ -62,21 +62,17 @@ router.post('/', async function (req, res, next) {
 /* http://localhost:3001/api/v1/restaurants/{id} */
 router.put('/:id', async function (req, res, next) {
     try {
-        if (parseInt(req.params.id) == req.body.id) {
-            const result = await db.one('UPDATE restaurants SET name = ${name}, latitude = ${latitude}, longitude = ${longitude}, street_address = ${street_address}, city = ${city}, province = ${province}, country = ${country}, phone_number = ${phone_number}, website = ${website} WHERE id = ${id} RETURNING *;', req.body);
-            console.log(result);
-            res.status(200).json({
-                status: "success",
-                data: {
-                    restaurant: result
-                }
-            });
-        } else {
-            res.status(400).json({
-                status: "failed",
-                reason: "Invalid request. ID in URI does not match ID in request body."
-            })
-        }
+        console.log(req.params.id);
+        const result = await db.one('UPDATE restaurants SET name = ${body.name}, latitude = ${body.latitude}, longitude = ${body.longitude}, street_address = ${body.street_address}, city = ${body.city}, province = ${body.province}, country = ${body.country}, phone_number = ${body.phone_number}, website = ${body.website} WHERE id = ${params.id} RETURNING *;', req);
+        console.log(result);
+        res.status(200).json({
+            status: "success",
+            data: {
+                restaurant: result
+            }
+        });
+
+
     } catch (error) {
         console.log(error);
     }

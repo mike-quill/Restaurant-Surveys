@@ -25,7 +25,8 @@ function RestaurantsList(props) {
 
     }, [])
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
         try {
             const response = await RestaurantAPI.delete(`/${id}`);
             setRestaurants(restaurants.filter(restaurant => {
@@ -36,8 +37,13 @@ function RestaurantsList(props) {
         }
     }
 
-    const handleEdit = (id) => {
+    const handleEdit = (e, id) => {
+        e.stopPropagation();
         navigate(`/restaurants/${id}/edit`)
+    }
+
+    const handleRestaurantSelect = (id) => {
+        navigate(`restaurants/${id}`)
     }
 
     return (
@@ -56,13 +62,13 @@ function RestaurantsList(props) {
                 <tbody>
                     {restaurants && restaurants.map(restaurant => {
                         return (
-                            <tr key={restaurant.id}>
+                            <tr onClick={() => handleRestaurantSelect(restaurant.id)} key={restaurant.id}>
                                 <td>{restaurant.name}</td>
                                 <td>{restaurant.street_address}</td>
                                 <td>Rating</td>
                                 <td>{restaurant.phone_number}</td>
-                                <td><button onClick={() => handleEdit(restaurant.id)} className='btn btn-warning'>Edit</button></td>
-                                <td><button onClick={() => handleDelete(restaurant.id)} className='btn btn-danger'>Delete</button></td>
+                                <td><button onClick={(e) => handleEdit(e, restaurant.id)} className='btn btn-warning'>Edit</button></td>
+                                <td><button onClick={(e) => handleDelete(e, restaurant.id)} className='btn btn-danger'>Delete</button></td>
                             </tr>
                         );
                     })}
