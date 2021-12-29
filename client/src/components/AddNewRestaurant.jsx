@@ -27,6 +27,7 @@ function AddNewRestaurant() {
                 latitude: latitude,
                 longitude: longitude,
                 street_address: streetAddress,
+                city: city,
                 province: province,
                 country: country,
                 phone_number: phoneNumber,
@@ -80,7 +81,7 @@ function AddNewRestaurant() {
                                 <Form.Group className="mb-3" controlId="newRestaurantProvince">
                                     <Form.Label>Province</Form.Label>
                                     {/* <Form.Control name='province' value={province} type="text" onChange={(e) => setProvince(e.target.value)} /> */}
-                                    <Form.Select name='province' value={province} onChange={(e) => setProvince(e.target.value)} defaultValue={"none"}>
+                                    <Form.Select name='province' onChange={(e) => setProvince(e.target.value)} defaultValue={"none"}>
                                         <option value="none">Select Province</option>
                                         <option value="Ontario">Ontario</option>
                                         <option value="Quebec">Quebec</option>

@@ -47,7 +47,7 @@ router.get('/:id', async function (req, res, next) {
 /* http://localhost:3001/api/v1/restaurants/ */
 router.post('/', async function (req, res, next) {
     try {
-        const result = await db.one('INSERT INTO restaurants (name, latitude, longitude, street_address, province, country, phone_number, website) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [req.body.name, req.body.latitude, req.body.longitude, req.body.street_address, req.body.province, req.body.country, req.body.phone_number, req.body.website]);
+        const result = await db.one('INSERT INTO restaurants (name, latitude, longitude, street_address, city, province, country, phone_number, website) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [req.body.name, req.body.latitude, req.body.longitude, req.body.street_address, req.body.city, req.body.province, req.body.country, req.body.phone_number, req.body.website]);
         res.status(200).json({
             status: "success",
             new_id: result.id,
@@ -63,7 +63,7 @@ router.post('/', async function (req, res, next) {
 router.put('/:id', async function (req, res, next) {
     try {
         if (parseInt(req.params.id) == req.body.id) {
-            const result = await db.one('UPDATE restaurants SET name = ${name}, latitude = ${latitude}, longitude = ${longitude}, street_address = ${street_address}, province = ${province}, country = ${country}, phone_number = ${phone_number}, website = ${website} WHERE id = ${id} RETURNING *;', req.body);
+            const result = await db.one('UPDATE restaurants SET name = ${name}, latitude = ${latitude}, longitude = ${longitude}, street_address = ${street_address}, city = ${city}, province = ${province}, country = ${country}, phone_number = ${phone_number}, website = ${website} WHERE id = ${id} RETURNING *;', req.body);
             console.log(result);
             res.status(200).json({
                 status: "success",

@@ -1,10 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import RestaurantAPI from '../apis/RestaurantAPI';
+import {useNavigate} from 'react-router-dom';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 
 function RestaurantsList(props) {
 
     const { restaurants, setRestaurants } = useContext(RestaurantsContext);
+
+    let navigate = useNavigate();
 
     useEffect(() => {
 
@@ -33,7 +36,9 @@ function RestaurantsList(props) {
         }
     }
 
-
+    const handleEdit = (id) => {
+        navigate(`/restaurants/${id}/edit`)
+    }
 
     return (
         <div className='list-group'>
@@ -56,7 +61,7 @@ function RestaurantsList(props) {
                                 <td>{restaurant.street_address}</td>
                                 <td>Rating</td>
                                 <td>{restaurant.phone_number}</td>
-                                <td><button className='btn btn-warning'>Edit</button></td>
+                                <td><button onClick={() => handleEdit(restaurant.id)} className='btn btn-warning'>Edit</button></td>
                                 <td><button onClick={() => handleDelete(restaurant.id)} className='btn btn-danger'>Delete</button></td>
                             </tr>
                         );
