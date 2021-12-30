@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import RestaurantAPI from '../apis/RestaurantAPI';
+import AddNewSurvey from '../components/AddNewSurvey';
 import StarRating from '../components/StarRating';
 import Surveys from '../components/Surveys';
 import { RestaurantsContext } from '../context/RestaurantsContext';
@@ -15,21 +16,24 @@ const RestaurantDetails = () => {
         const fetchData = async () => {
             try {
                 const response = await RestaurantAPI.get(`/${id}`);
-                setSelectedRestaurant(response.data.data.restaurant);
+                console.log(response);
+                setSelectedRestaurant(response.data.data);
             } catch (error) {
                 console.log(error);
             }
 
         }
         fetchData();
-    }, [])
+    }, []);
 
     return (
-        <div>
+        <div className='container'>
             {selectedRestaurant && (
                 <>
+                <h1 className='text-center'>{selectedRestaurant.restaurant.name}</h1>
                 <div className="mt-3">
-                    <Surveys />
+                    <Surveys surveys={selectedRestaurant.surveys}/>
+                    <AddNewSurvey />
                 </div>
                 </>
             )}

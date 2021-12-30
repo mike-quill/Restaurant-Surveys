@@ -26,14 +26,16 @@ router.get('/', async function (req, res, next) {
 /* http://localhost:3001/api/v1/restaurants/{id} */
 router.get('/:id', async function (req, res, next) {
     try {
-        const result = await db.oneOrNone('SELECT * FROM restaurants WHERE id = $1;', req.params.id);
-        if (result === null) {
+        const restaurant = await db.oneOrNone('SELECT * FROM restaurants WHERE id = $1;', req.params.id);
+        const surveys = await db.any('SELECT * FROM surveys WHERE restaurant_id = $1;', req.params.id);
+        if (restaurant === null) {
             res.sendStatus(404);
         } else {
             res.status(200).json({
                 status: "success",
                 data: {
-                    restaurant: result
+                    restaurant: restaurant,
+                    surveys: surveys
                 }
             });
         }
@@ -85,6 +87,21 @@ router.delete('/:id', async function (req, res, next) {
     try {
         await db.none("DELETE FROM restaurants WHERE id = $1;", req.params.id);
         res.sendStatus(204);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+/* POST new survey for restaurant */
+/* http://localhost:3001/api/v1/restaurants/{id}/survey */
+router.post('/:id/survey', async function (req, res, next) {
+    try {
+        const result = await db.one('INSERT INTO surveys (restaurant_id, comments, rating, date_submitted) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *', [req.body.restaurant_id, req.body.comments, req.body.rating]);
+        res.status(200).json({
+            status: "success",
+            new_id: result.id,
+            survey: result
+        });
     } catch (error) {
         console.log(error);
     }
