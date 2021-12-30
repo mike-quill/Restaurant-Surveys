@@ -6,14 +6,11 @@ import {Form, Col, Row, Button} from 'react-bootstrap';
 
 const EditRestaurant = (props) => {
     const { id } = useParams();
-
+    
     const [name, setName] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
     const [streetAddress, setStreetAddress] = useState("");
     const [city, setCity] = useState("");
     const [province, setProvince] = useState("");
-    const [country, setCountry] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [website, setWebsite] = useState("");
 
@@ -23,12 +20,9 @@ const EditRestaurant = (props) => {
         const fetchData = async () => {
             const response = await RestaurantAPI.get(`/${id}`);
             setName(response.data.data.restaurant.name);
-            setLatitude(response.data.data.restaurant.latitude);
-            setLongitude(response.data.data.restaurant.longitude);
             setStreetAddress(response.data.data.restaurant.street_address);
             setCity(response.data.data.restaurant.city);
             setProvince(response.data.data.restaurant.province);
-            setCountry(response.data.data.restaurant.country);
             setPhoneNumber(response.data.data.restaurant.phone_number);
             setWebsite(response.data.data.restaurant.website);
         }
@@ -40,12 +34,9 @@ const EditRestaurant = (props) => {
         try {
             const updatedRestaurant = await RestaurantAPI.put(`/${id}`, {
                 name: name,
-                latitude: latitude,
-                longitude: longitude,
                 street_address: streetAddress,
                 city: city,
                 province: province,
-                country: country,
                 phone_number: phoneNumber,
                 website: website
             });
@@ -100,12 +91,6 @@ const EditRestaurant = (props) => {
                         </Form.Group>
                     </Col>
                     <Col xs="12" md="4">
-                        <Form.Group className="mb-3" controlId="newRestaurantCountry">
-                            <Form.Label>Country</Form.Label>
-                            <Form.Control disabled name='country' value={country} type="text" onChange={(e) => setCountry(e.target.value)} />
-                        </Form.Group>
-                    </Col>
-                    <Col xs="12" md="4">
                         <Form.Group className="mb-3" controlId="newRestaurantPhone">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control name='phoneNumber' value={phoneNumber} type="text" onChange={(e) => setPhoneNumber(e.target.value)} />
@@ -115,18 +100,6 @@ const EditRestaurant = (props) => {
                         <Form.Group className="mb-3" controlId="newRestaurantWebsite">
                             <Form.Label>Website</Form.Label>
                             <Form.Control name='website' value={website} type="text" onChange={(e) => setWebsite(e.target.value)} />
-                        </Form.Group>
-                    </Col>
-                    <Col xs="12" md="4">
-                        <Form.Group className="mb-3" controlId="newRestaurantLatitude">
-                            <Form.Label>Latitude</Form.Label>
-                            <Form.Control name='latitude' value={latitude} type="text" onChange={(e) => setLatitude(e.target.value)} />
-                        </Form.Group>
-                    </Col>
-                    <Col xs="12" md="4">
-                        <Form.Group className="mb-3" controlId="newRestaurantLongitude">
-                            <Form.Label>Longitude</Form.Label>
-                            <Form.Control name='longitude' value={longitude} type="text" onChange={(e) => setLongitude(e.target.value)} />
                         </Form.Group>
                     </Col>
                 </Row>

@@ -10,12 +10,9 @@ function AddNewRestaurant() {
     const { addRestaurants } = useContext(RestaurantsContext);
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
     const [streetAddress, setStreetAddress] = useState("");
     const [city, setCity] = useState("");
     const [province, setProvince] = useState("");
-    const [country, setCountry] = useState("Canada");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [website, setWebsite] = useState("");
 
@@ -24,12 +21,9 @@ function AddNewRestaurant() {
         try {
             const response = await RestaurantAPI.post("/", {
                 name: name,
-                latitude: latitude,
-                longitude: longitude,
                 street_address: streetAddress,
                 city: city,
                 province: province,
-                country: country,
                 phone_number: phoneNumber,
                 website: website
             });
@@ -98,12 +92,6 @@ function AddNewRestaurant() {
                                 </Form.Group>
                             </Col>
                             <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantCountry">
-                                    <Form.Label>Country</Form.Label>
-                                    <Form.Control disabled name='country' value={country} type="text" onChange={(e) => setCountry(e.target.value)} />
-                                </Form.Group>
-                            </Col>
-                            <Col xs="12" md="4">
                                 <Form.Group className="mb-3" controlId="newRestaurantPhone">
                                     <Form.Label>Phone</Form.Label>
                                     <Form.Control name='phoneNumber' value={phoneNumber} type="text" onChange={(e) => setPhoneNumber(e.target.value)} />
@@ -113,18 +101,6 @@ function AddNewRestaurant() {
                                 <Form.Group className="mb-3" controlId="newRestaurantWebsite">
                                     <Form.Label>Website</Form.Label>
                                     <Form.Control name='website' value={website} type="text" onChange={(e) => setWebsite(e.target.value)} />
-                                </Form.Group>
-                            </Col>
-                            <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantLatitude">
-                                    <Form.Label>Latitude</Form.Label>
-                                    <Form.Control name='latitude' value={latitude} type="text" onChange={(e) => setLatitude(e.target.value)} />
-                                </Form.Group>
-                            </Col>
-                            <Col xs="12" md="4">
-                                <Form.Group className="mb-3" controlId="newRestaurantLongitude">
-                                    <Form.Label>Longitude</Form.Label>
-                                    <Form.Control name='longitude' value={longitude} type="text" onChange={(e) => setLongitude(e.target.value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
