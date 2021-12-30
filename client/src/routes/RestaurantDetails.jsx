@@ -30,11 +30,17 @@ const RestaurantDetails = () => {
         <div className='container'>
             {selectedRestaurant && (
                 <>
-                <h1 className='text-center'>{selectedRestaurant.restaurant.name}</h1>
-                <div className="mt-3">
-                    <Surveys surveys={selectedRestaurant.surveys}/>
-                    <AddNewSurvey />
-                </div>
+                    <h1 className='text-center'>{selectedRestaurant.restaurant.name}</h1>
+                    <div className='text-center'>
+                        <StarRating rating={selectedRestaurant.restaurant.average_rating} />
+                        <span>
+                            {selectedRestaurant.restaurant.ratings_count ? `(${selectedRestaurant.restaurant.ratings_count})` : '(0)'}
+                        </span>
+                    </div>
+                    <div className="mt-3">
+                        <Surveys surveys={selectedRestaurant.surveys} />
+                        <AddNewSurvey />
+                    </div>
                 </>
             )}
         </div>

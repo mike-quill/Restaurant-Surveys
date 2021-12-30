@@ -8,8 +8,9 @@ router.use(express.json());
 /* http://localhost:3001/api/v1/restaurants/ */
 router.get('/', async function (req, res, next) {
     try {
-        const results = await db.any('SELECT * FROM restaurants');
-        console.log(results.length);
+        //const results = await db.any('SELECT * FROM restaurants;');
+        const results = await db.any('SELECT r.*, s.ratings_count, s.average_rating FROM restaurants r LEFT JOIN (SELECT restaurant_id, COUNT(rating) AS ratings_count, TRUNC(AVG(rating), 1) AS "average_rating" FROM surveys GROUP BY restaurant_id) s ON r.id = s.restaurant_id;');
+
         res.status(200).json({
             status: "success",
             results: results.length,
@@ -26,7 +27,7 @@ router.get('/', async function (req, res, next) {
 /* http://localhost:3001/api/v1/restaurants/{id} */
 router.get('/:id', async function (req, res, next) {
     try {
-        const restaurant = await db.oneOrNone('SELECT * FROM restaurants WHERE id = $1;', req.params.id);
+        const restaurant = await db.oneOrNone('SELECT r.*, s.ratings_count, s.average_rating FROM restaurants r LEFT JOIN (SELECT restaurant_id, COUNT(rating) AS ratings_count, TRUNC(AVG(rating), 1) AS "average_rating" FROM surveys GROUP BY restaurant_id) s ON r.id = s.restaurant_id WHERE r.id = $1;', req.params.id);
         const surveys = await db.any('SELECT * FROM surveys WHERE restaurant_id = $1;', req.params.id);
         if (restaurant === null) {
             res.sendStatus(404);
@@ -85,7 +86,7 @@ router.put('/:id', async function (req, res, next) {
 router.delete('/:id', async function (req, res, next) {
     console.log(req);
     try {
-        await db.none("DELETE FROM restaurants WHERE id = $1;", req.params.id);
+        await db.none("DELETE FROM restaurants CASCADE WHERE id = $1;", req.params.id);
         res.sendStatus(204);
     } catch (error) {
         console.log(error);

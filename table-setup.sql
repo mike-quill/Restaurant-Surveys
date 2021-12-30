@@ -17,5 +17,5 @@ CREATE TABLE surveys (
 	rating INTEGER NOT NULL check(rating >= 1 and rating <= 5),
 	comments TEXT NOT NULL,
 	date_submitted TIMESTAMP,
-	FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
+	FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );

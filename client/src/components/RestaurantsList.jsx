@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import RestaurantAPI from '../apis/RestaurantAPI';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RestaurantsContext } from '../context/RestaurantsContext';
+import StarRating from './StarRating';
 
 function RestaurantsList(props) {
 
@@ -46,6 +47,25 @@ function RestaurantsList(props) {
         navigate(`restaurants/${id}`)
     }
 
+    const renderRating = (restaurant) => {
+        if(restaurant.ratings_count > 0) {
+            return (
+                <>
+                    <StarRating rating={restaurant.average_rating} />
+                    <span>({restaurant.ratings_count})</span>
+                </>
+            )
+        } else {
+            return (
+                <>
+                <span>(0) reviews</span>
+                </>
+            )
+        }
+        
+        
+    }
+
     return (
         <div className='list-group'>
             <table className='table table-hover table-dark'>
@@ -65,7 +85,7 @@ function RestaurantsList(props) {
                             <tr onClick={() => handleRestaurantSelect(restaurant.id)} key={restaurant.id}>
                                 <td>{restaurant.name}</td>
                                 <td>{restaurant.street_address}</td>
-                                <td>Rating</td>
+                                <td>{renderRating(restaurant)}</td>
                                 <td>{restaurant.phone_number}</td>
                                 <td><button onClick={(e) => handleEdit(e, restaurant.id)} className='btn btn-warning'>Edit</button></td>
                                 <td><button onClick={(e) => handleDelete(e, restaurant.id)} className='btn btn-danger'>Delete</button></td>

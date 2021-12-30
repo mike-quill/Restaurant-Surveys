@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import RestaurantAPI from '../apis/RestaurantAPI';
 
 const AddNewSurvey = () => {
 
+    const { id } = useParams();
     const [comments, setComments] = useState("");
     const [rating, setRating] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submit");
+        try {
+            const newSurvey = await RestaurantAPI.post(`/${id}/survey`, {
+                restaurant_id: id,
+                comments: comments,
+                rating: rating
+            });
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     return (
