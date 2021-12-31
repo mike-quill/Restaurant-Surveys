@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
     return (
       <div>
-        <h1 className='text-center'>Gourmet Survey</h1>
+        <h1 className='text-center display-1'><strong>Gourmet Survey</strong></h1>
       </div>
     );
   }

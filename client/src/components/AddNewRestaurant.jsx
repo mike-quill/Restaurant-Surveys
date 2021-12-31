@@ -27,7 +27,12 @@ function AddNewRestaurant() {
                 phone_number: phoneNumber,
                 website: website
             });
-            console.log(response);
+            setName("");
+            setStreetAddress("");
+            setCity("");
+            setProvince("");
+            setPhoneNumber("");
+            setWebsite("");
             addRestaurants(response.data.restaurant);
         } catch (error) {
             console.log(error);
@@ -75,7 +80,7 @@ function AddNewRestaurant() {
                                 <Form.Group className="mb-3" controlId="newRestaurantProvince">
                                     <Form.Label>Province</Form.Label>
                                     {/* <Form.Control name='province' value={province} type="text" onChange={(e) => setProvince(e.target.value)} /> */}
-                                    <Form.Select name='province' onChange={(e) => setProvince(e.target.value)} defaultValue={"none"}>
+                                    <Form.Select name='province' onChange={(e) => setProvince(e.target.value)} value={province}>
                                         <option value="none">Select Province</option>
                                         <option value="Ontario">Ontario</option>
                                         <option value="Quebec">Quebec</option>
