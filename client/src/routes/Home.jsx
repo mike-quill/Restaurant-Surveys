@@ -6,13 +6,13 @@ import RestaurantsList from '../components/RestaurantsList';
 import { Container } from 'react-bootstrap';
 
 const Home = () => {
-    return (
-        <Container>
-            <Header />
-            <AddNewRestaurant />
-            <RestaurantsList />
-        </Container>
-    );
+	return (
+		<Container>
+			<Header />
+			<AddNewRestaurant />
+			<RestaurantsList />
+		</Container>
+	);
 }
 
 export default Home

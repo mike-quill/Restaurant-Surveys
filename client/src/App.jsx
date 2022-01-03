@@ -8,18 +8,18 @@ import NotFound from './routes/NotFound';
 import { RestaurantsContextProvider } from './context/RestaurantsContext';
 
 function App() {
-  return (
-    <RestaurantsContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='restaurants/:id' element={<RestaurantDetails />} />
-            <Route path='restaurants/:id/edit' element={<RestaurantEdit />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-    </RestaurantsContextProvider>
-  );
+	return (
+		<RestaurantsContextProvider>
+				<BrowserRouter>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='restaurants/:id' element={<RestaurantDetails />} />
+						<Route path='restaurants/:id/edit' element={<RestaurantEdit />} />
+						<Route path='*' element={<NotFound />} />
+					</Routes>
+				</BrowserRouter>
+		</RestaurantsContextProvider>
+	);
 }
 
 export default App;
