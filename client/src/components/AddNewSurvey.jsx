@@ -26,8 +26,8 @@ const AddNewSurvey = ({ fetchData }) => {
 
 		const newErrors = findFormErrors();
 
+		setErrors(newErrors);
 		if (Object.keys(newErrors).length > 0) {
-			setErrors(newErrors);
 			console.log(errors);
 		} else {
 			try {
@@ -38,7 +38,6 @@ const AddNewSurvey = ({ fetchData }) => {
 				});
 				setComments("");
 				setRating("");
-				setErrors({});
 				await fetchData();
 
 			} catch (error) {

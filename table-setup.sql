@@ -1,9 +1,9 @@
 CREATE TABLE restaurants (
 	id BIGSERIAL PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
-	street_address VARCHAR(255),
-	city VARCHAR(255),
-	province VARCHAR(50),
+	street_address VARCHAR(255) NOT NULL,
+	city VARCHAR(255) NOT NULL,
+	province VARCHAR(50) NOT NULL,
 	phone_number VARCHAR(20),
 	website VARCHAR(255)
 );
